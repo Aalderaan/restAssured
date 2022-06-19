@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="UITestSuite" verbose="1" parallel="tests" thread-count="1">
+    <test name="usersInfoTests">
+        <parameter name="userName" value="automation@keepitqa.com"></parameter>
+        <parameter name="password" value="E#*b2wGIbFHz"></parameter>
+        <classes>
+            <class name="com.example.restassured.tests.TestApi" />
+        </classes>
+    </test>
+</suite>
