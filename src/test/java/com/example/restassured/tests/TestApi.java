@@ -1,5 +1,6 @@
 package com.example.restassured.tests;
 import com.example.restassured.tests.steps.UsersInfoSteps;
+import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -28,5 +29,19 @@ public class TestApi {
         usersInfoSteps.getUsersInfo(userName, password, usersId)
                 .then()
                 .assertThat().body(matchesXsdInClasspath(USERS_SCHEMA));
+    }
+
+    /**
+     * In the 'checkPossibilityToSignInWithValidCredentials' method we take the  String arguments, witch we extract
+     * from testSuits.xml file, then with 'signIn' method and getStatusCode() we extract status code, and with assert
+     * we check if it corresponds to the expected one.
+     */
+
+    @Test
+    @Parameters({"userName", "password", "errorMessage"})
+    void checkPossibilityToSignInWithValidCredentials(String userName, String password, String errorMessage) {
+        int statusCode = usersInfoSteps.signIn(userName, password).getStatusCode();
+
+        Assert.assertEquals(statusCode, 200, errorMessage);
     }
 }

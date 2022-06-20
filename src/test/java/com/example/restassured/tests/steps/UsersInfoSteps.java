@@ -4,6 +4,8 @@ import com.example.restassured.tests.endpoints.Endpoints;
 import com.example.restassured.tests.utils.ApiServices;
 import io.restassured.response.Response;
 
+import static com.example.restassured.tests.endpoints.Endpoints.SIGNIN;
+
 public class UsersInfoSteps {
     private final ApiServices apiServices = new ApiServices();
 
@@ -19,12 +21,20 @@ public class UsersInfoSteps {
     }
 
     /**
-     * In the 'getUsersInfo' method we take to String arguments, witch we use for
-     * the basic authorization, and extracted user's id(witch we add to the base URL),
-     * and send the request to a specific URL (BASE_URL + endpoint)
+     * In the 'getUsersInfo' method we take two String arguments, witch we use for
+     * the basic authorization, also pass static endpoint for Users and extracted user's info,
      */
 
     public Response getUsersInfo(String username, String password, String usersId) {
         return apiServices.getRequest(username, password, Endpoints.USERS + usersId);
+    }
+
+    /**
+     * In the 'signIn' method we take two String arguments, witch we use for
+     * the basic authorization, also pass static endpoint for sigIn and return Response.
+     */
+
+    public Response signIn(String username, String password) {
+        return apiServices.getRequest(username, password, Endpoints.SIGNIN);
     }
 }
